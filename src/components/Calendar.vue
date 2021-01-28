@@ -113,6 +113,7 @@ export default {
             const { position, page } = data;
             return h(CalendarNav, {
               props: {
+                isBuddhistYear: this.isBuddhistYear,
                 value: page,
                 position,
                 validator: e => this.canMove(e, { position }),
@@ -282,6 +283,7 @@ export default {
     attributes: [Object, Array],
     trimWeeks: Boolean,
     disablePageSwipe: Boolean,
+    isBuddhistYear: Boolean,
   },
   data() {
     return {
@@ -646,7 +648,7 @@ export default {
       const key = `${year.toString()}-${month.toString()}`;
       let page = this.pages.find(p => p.key === key);
       if (!page || ignoreCache) {
-        const date = new Date(year, month - 1, 15);
+        const date = new Date(this.isBuddhistYear ? year + 543 : year, month - 1, 15);
         const monthComps = this.$locale.getMonthComps(month, year);
         const prevMonthComps = this.$locale.getPrevMonthComps(month, year);
         const nextMonthComps = this.$locale.getNextMonthComps(month, year);
@@ -658,8 +660,8 @@ export default {
           title: this.$locale.format(date, this.$locale.masks.title),
           shortMonthLabel: this.$locale.format(date, 'MMM'),
           monthLabel: this.$locale.format(date, 'MMMM'),
-          shortYearLabel: year.toString().substring(2),
-          yearLabel: year.toString(),
+          shortYearLabel: this.isBuddhistYear ? (year + 543).toString().substring(2) : year.toString().substring(2),
+          yearLabel: this.isBuddhistYear ? (year + 543).toString() : year.toString(),
           monthComps,
           prevMonthComps,
           nextMonthComps,

@@ -28,7 +28,7 @@
           {{ locale.format(date, 'D') }}
         </span>
         <span class="vc-year">
-          {{ locale.format(date, 'YYYY') }}
+          {{ locale.format(date, 'YYYY') | buddhistYear(isBuddhistYear) }}
         </span>
       </div>
       <div class="vc-time">
@@ -63,11 +63,17 @@ import { pad } from '../utils/helpers';
 export default {
   name: 'TimePicker',
   components: { TimeSelect },
+  filters: {
+    buddhistYear(year, isBuddhistYear) {
+        return isBuddhistYear ? parseInt(year, 10) + 543 : year;
+    }
+  },
   props: {
     value: { type: Object, required: true },
     locale: { type: Object, required: true },
     theme: { type: Object, required: true },
     is24hr: { type: Boolean, default: true },
+    isBuddhistYear: { type: Boolean, default: false },
     minuteIncrement: { type: Number, default: 1 },
     showBorder: Boolean,
   },

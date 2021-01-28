@@ -75,6 +75,7 @@ export default {
   },
   mixins: [childMixin],
   props: {
+    isBuddhistYear: { type: Boolean, default: false },
     value: { type: Object, default: () => ({ month: 0, year: 0 }) },
     validator: { type: Function, default: () => () => true },
   },
@@ -94,9 +95,10 @@ export default {
       return this.value ? this.value.year || 0 : 0;
     },
     title() {
-      return this.monthMode
-        ? this.yearIndex
-        : `${this.firstYear} - ${this.lastYear}`;
+      if (this.monthMode) {
+        return this.isBuddhistYear ? this.yearIndex + 543 : this.yearIndex;
+      }
+      return `${this.firstYear} - ${this.lastYear}`;
     },
     monthItems() {
       return this.getMonthItems(this.yearIndex);
@@ -134,10 +136,10 @@ export default {
       return this.monthMode ? this.monthItems : this.yearItems;
     },
     firstYear() {
-      return head(this.yearItems.map(i => i.year));
+      return head(this.yearItems.map(i => i.label));
     },
     lastYear() {
-      return last(this.yearItems.map(i => i.year));
+      return last(this.yearItems.map(i => i.label));
     },
   },
   watch: {
@@ -215,7 +217,7 @@ export default {
         items.push({
           year,
           id: year,
-          label: year,
+          label: this.isBuddhistYear ? year + 543 : year,
           ariaLabel: year,
           isActive: year === this.year,
           isCurrent: year === thisYear,

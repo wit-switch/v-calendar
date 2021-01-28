@@ -3,7 +3,7 @@
       <img width="200" src="https://res.cloudinary.com/dqgcfqzpk/image/upload/v1557324348/v-calendar/hero.png">
     </a>
     <br>
-    An elegant calendar and datepicker plugin for Vuejs.
+    Fork from v-calendar for show buddhist year
 </p>
 
 <p align="center">
@@ -16,12 +16,16 @@
 ------
 
 ```bash
-npm i --save v-calendar
+npm i --save v-calendar-buddhist-year
 ```
 
 ## Documentation
 
 For full documentation, visit [vcalendar.io](https://vcalendar.io/).
+
+## Buddhist Year
+
+To enable buddhist year display instead of christian year, send props type **Boolean** name **is-buddhist-year** with the value of true.
 
 ### Attributes
 

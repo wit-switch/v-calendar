@@ -66,6 +66,7 @@ export default {
               locale: this.$locale,
               theme: this.$theme,
               is24hr: this.is24hr,
+              isBuddhistYear: this.isBuddhistYear,
               minuteIncrement: this.minuteIncrement,
               showBorder: !this.isTime,
             },
@@ -85,6 +86,7 @@ export default {
           locale: this.$locale,
         },
         props: {
+          isBuddhistYear: this.isBuddhistYear,
           minDate: this.minDateExact || this.minDate,
           maxDate: this.maxDateExact || this.maxDate,
           disabledDates: this.disabledDates,
@@ -155,6 +157,7 @@ export default {
     value: { type: null, required: true },
     modelConfig: { type: Object, default: () => ({ ..._dateConfig }) },
     is24hr: Boolean,
+    isBuddhistYear: Boolean,
     minuteIncrement: Number,
     isRequired: Boolean,
     isRange: Boolean,
