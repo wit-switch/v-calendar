@@ -78,5 +78,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/wit-switch/v-calendar"
+  },
+  "publishConfig": {
+    "registry": "http://27.254.137.165:8081/repository/npm-host/"
   }
 }
